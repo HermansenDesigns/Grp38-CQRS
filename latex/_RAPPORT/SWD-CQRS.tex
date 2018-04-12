@@ -1,0 +1,24 @@
+\documentclass[a4paper,openany]{memoir}
+
+%*******************************************************************************
+%ÆNDRINGER LAVES HER
+%*******************************************************************************
+\title{CQRS Architectural Pattern}
+
+%-------------------------------------------------------------------------------
+% Sæt data til forside. Kan kommenteres ind efter behov.
+\newcommand{\frontpageDate}{12-04-2018}  % Samme dato der vises i sidefod
+%\newcommand{\frontpageImage}{ImageName.png}
+%\newcommand{\frontpageCharacters}{NumberOfCharacters}
+%*******************************************************************************
+
+% Inkluder preambles
+\usepackage{../SharedPreamble}
+\usepackage{PrivatePreamble}
+
+\begin{document}
+
+	\import{../}{Forside}  \newpage
+	\tableofcontents\thispagestyle{fancy}  \newpage
+
+\end{document}
