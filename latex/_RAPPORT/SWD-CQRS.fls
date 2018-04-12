@@ -232,6 +232,17 @@ INPUT ./Billeder/aulogo.png
 INPUT ./Billeder/aulogo.png
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/bookman/pbkd8t.vf
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/bookman/pbkd8r.tfm
+INPUT Sektioner/Intro.tex
+INPUT Sektioner/Intro.tex
+INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/bookman/pbkl8t.tfm
+INPUT Billeder/aulogo.png
+INPUT ./Billeder/aulogo.png
+INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/vf/adobe/bookman/pbkl8t.vf
+INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/adobe/bookman/pbkl8r.tfm
+INPUT Sektioner/Body.tex
+INPUT Sektioner/Body.tex
+INPUT Billeder/aulogo.png
+INPUT ./Billeder/aulogo.png
 OUTPUT SWD-CQRS.toc
 INPUT SWD-CQRS.aux
 INPUT ./SWD-CQRS.out
@@ -241,6 +252,8 @@ OUTPUT SWD-CQRS.run.xml
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/bookman/ubkd8a.pfb
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/bookman/ubkd8a.pfb
+INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/bookman/ubkl8a.pfb
+INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/bookman/ubkl8a.pfb
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb
 INPUT C:/Users/Dreli/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb
