@@ -1,1 +1,10 @@
 \section{Brug}
+
+\paragraph{Event sourcing} er brugt i de applikationer hvor transaktionerne / historik er kritisk for forretnings modellen, på den applikation der har implementeret den. Event sourcing har nogle ulemper, det er kompliceret at implementere, styre og vedligeholde. Men for nogle applikationer kan det være nyttigt at kunne se denne sekvens af handlinger, fordi det lige præcis er nødvendigt. 
+
+I de følgende scenarier kunne det være nyttigt
+
+\begin{itemize}  
+    \item Applikationer, hvor historik er en prioritet.
+    \item Applikationer, hvor handlinger skal være immutable (umuterbart).
+\end{itemize}
