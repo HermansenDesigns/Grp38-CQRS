@@ -1,1 +1,30 @@
 \section{Andre patterns}
+Ved sammeligning af \textbf{CQRS} og andre patterns er det nærliggende at inddrage \textbf{CRUD}.
+
+Begge disse patterns bruges til, at tilgå og skrive data på en Database, men deres metoder er forskellige. Forskellen udspiller sig i måden de er implementeret på og derfor også måden de operere på.\newline
+
+På understående figur \ref{fig:CRUDimpl} nedenfor kan det ses, hvordan \textbf{CRUD}-implementeringen ved hjælp af sin \textit{Data-access}-klasse både tilgår og skriver data på databasen. Derimod er dette separeret på figur \ref{fig:CQRSimpl}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{CRUDImplementation.png}
+		\captionof{figure}{\textbf{CRUD}-Implemantation}
+		\label{fig:CRUDimpl}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=.7\linewidth]{CQRSImplementation}
+		\captionof{figure}{\textbf{CQRS}-Implemtation}
+		\label{fig:CQRSimpl}
+	\end{minipage}
+\end{figure}
+
+Ved at separere læse og skrive operationerne opnås skaleringsmuligheder der med \textbf{CRUD} ikke er mulige. Dette skyldes, at disse ikke skal udvikeles 1:1.\newline
+
+Den største forskel på de to patterns udspiller sig i, at \textbf{CRUD} udvikles med \textbf{DDD} \textbf{D}omain \textbf{D}riven \textbf{D}esign, hvorimod \textbf{CQRS} udvikles i et Begvienhedsdrevet design (Event Driven Design). som navnene antyder bliver det domæne drevne design bygget op af domæner som figurer i den virkelige verden, hvorimod eventdriven design er bygget op om begivenheder der sker. som f.eks. at en kunde bestiller en kop kaffe.
+
+Ved til dels at opbygget et system om det eventdrevne princip og at adskille læse/skrive-operationer mødes nogle problematikker som skal løses. Disse problemer gør, at \textbf{CQRS} kun bruges når systemet opnår en vis størrelse og kompleksitet, men at \textbf{CQRS} forstrækkes når dette niveau opnås.\newline
+
+Ved implementering af \textbf{CQRS} gøres der brug af eventsourcing, som også vil blive omtalt herefter. I korte træk er det den del der sørger for, at fuldende den eventdrevne tankegang og underbygge reaktion indbydes i pattern'et.
