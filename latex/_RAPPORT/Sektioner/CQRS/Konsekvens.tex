@@ -1,2 +1,5 @@
 \section{Konsekvens}
+Umiddelbart virker \textbf{CQRS} som et simpelt pattern, men ved at implementere dette kan kompleksiteten af systemet hurtig øges, da dette oftes inkludere brugen af Event Sourcing, som implementeringsmæssigt kan forekomme ret omfattende. Grunden til, at Event sourcing ofte inkluderes er, et ønske om et system der kan følge op på hændelser.
+
+End anden konsekvens ved at benytte \textbf{CQRS} er, at man ved at separere læse- og skriveoperationer kan komme ud for at den data der læses kan være i et stadie, der ikke stemmer overens med det forventede.
 
