@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregateNotFoundException.cs" />
+    <Compile Include="AggregateRoot.cs" />
     <Compile Include="Bus.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="ConcurrencyException.cs" />
@@ -53,11 +54,13 @@
     <Compile Include="IEventStore.cs" />
     <Compile Include="IHandles.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="Infrastructure\PrivateReflectionDynamicObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Infrastructure\readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

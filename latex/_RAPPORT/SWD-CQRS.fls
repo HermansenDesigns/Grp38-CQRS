@@ -237,10 +237,16 @@ INPUT Billeder/aulogo.png
 INPUT ./Billeder/aulogo.png
 INPUT C:/Program Files/MiKTeX 2.9/fonts/vf/adobe/bookman/pbkl8t.vf
 INPUT C:/Program Files/MiKTeX 2.9/fonts/tfm/adobe/bookman/pbkl8r.tfm
-INPUT Sektioner/Body.tex
-INPUT Sektioner/Body.tex
+INPUT Sektioner/CQRS-ThePattern.tex
+INPUT Sektioner/CQRS-ThePattern.tex
 INPUT Billeder/aulogo.png
 INPUT ./Billeder/aulogo.png
+INPUT Sektioner/CQRS-Implementation.tex
+INPUT Sektioner/CQRS-Implementation.tex
+INPUT Sektioner/EventSourcing.tex
+INPUT Sektioner/EventSourcing.tex
+INPUT Sektioner/EventSourcing-Implementation.tex
+INPUT Sektioner/EventSourcing-Implementation.tex
 OUTPUT SWD-CQRS.toc
 INPUT SWD-CQRS.aux
 INPUT ./SWD-CQRS.out
