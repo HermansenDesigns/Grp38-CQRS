@@ -1,6 +1,7 @@
 \changetocdepth {2}
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\babel@toc {danish}{}
+\defcounter {refsection}{0}\relax 
+\select@language {danish}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Indholdsfortegnelse}{2}{section*.1}
 \defcounter {refsection}{0}\relax 
