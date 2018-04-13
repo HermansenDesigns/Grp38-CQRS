@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    public class Command : IMessage
+    public interface IWriteModel
     {
+        
     }
 }

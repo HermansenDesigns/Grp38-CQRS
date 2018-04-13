@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    public interface IMessage
+    class Handles
     {
+        public void Handle(RenameProduct dto)
+        {
+            
+        }
     }
 }

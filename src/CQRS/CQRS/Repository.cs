@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    class Program
+    class Repository<TEntity>
     {
-        static void Main(string[] args)
+        private CQRSContext _context;
+
+        public Repository(CQRSContext context)
         {
+            _context = context;
         }
+
     }
 }

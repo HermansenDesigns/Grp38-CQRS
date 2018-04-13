@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    public class Bus
+    class ProductQuick
     {
-        
+        public Guid Id { get; set; }
+        public string ProductName { get; set; }
+        public int Rating { get; set; }
     }
 }
