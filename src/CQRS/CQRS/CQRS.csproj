@@ -42,6 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateNotFoundException.cs" />
+    <Compile Include="Bus.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="ConcurrencyException.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="EventStore.cs" />
+    <Compile Include="ICommandSender.cs" />
+    <Compile Include="IEventPublisher.cs" />
+    <Compile Include="IEventStore.cs" />
+    <Compile Include="IHandles.cs" />
+    <Compile Include="IMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
