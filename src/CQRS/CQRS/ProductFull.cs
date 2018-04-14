@@ -13,5 +13,6 @@ namespace CQRS
         public string ProductDescription { get; set; }
         public int Rating { get; set; }
         public int Stock { get; set; }
+        public int Version { get; set; }
     }
 }

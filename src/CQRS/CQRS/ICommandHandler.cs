@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    class Handles
+    public interface ICommandHandler<TCommand> where TCommand : Command
     {
-        public void Handle(RenameProduct dto)
-        {
-            
-        }
+        void Execute(TCommand command); 
     }
 }

@@ -18,7 +18,7 @@ namespace CQRS
 
         public TEntity Get(Guid id)
         {
-            return _context; 
+            
         }
 
         public void Add(TEntity entity)
@@ -33,8 +33,12 @@ namespace CQRS
 
         public void Edit(TEntity entity)
         {
-
+            
         }
 
+        public void save(TEntity, int expectedversion)
+        {
+            
+        }
     }
 }

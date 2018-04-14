@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    class RenameProduct
+    class RenameProductCommand : Command
     {
         public readonly string ProductName;
-        public readonly Guid Id;
 
-        public RenameProduct(string productName, Guid id)
+        public RenameProductCommand(string productName, Guid id, int version) : base(id,version)
         {
             ProductName = productName;
-            Id = id;
         }
     }
 }
