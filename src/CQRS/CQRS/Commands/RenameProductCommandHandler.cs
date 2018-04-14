@@ -9,9 +9,9 @@ namespace CQRS
     
         public class RenameProductCommandHandler : ICommandHandler<RenameProductCommand>
         {
-            private Repository<ProductFull> _repository;
+            private ProductFullRepository _repository;
 
-        public RenameProductCommandHandler(Repository<ProductFull> repository)
+        public RenameProductCommandHandler(ProductFullRepository repository)
         {
             _repository = repository;
         }
@@ -23,10 +23,10 @@ namespace CQRS
                     throw new ArgumentException("command or repository null");
                 }
 
-                var item = _repository.Get(command.Id);
+                var item = _repository.GetById(command.Id);
                 item.ProductName = command.ProductName;
                 item.Version++; 
-                _repository.save(item,item.Version); 
+                _repository.Save(item,item.Version); 
             }
         }
     

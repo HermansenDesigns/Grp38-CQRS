@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CQRS
 {
-    public class CQRSContext : DbContext
+    public class ReadContext : DbContext
     {
-        public CQRSContext()
+        public ReadContext()
         {
         }
 
-        public CQRSContext(DbContextOptions<CQRSContext> options) : base(options)
+        public ReadContext(DbContextOptions<ReadContext> options) : base(options)
         {
 
         }
 
-        public DbSet<ProductFull> Products { get; set; }
+        public DbSet<ProductQuick> Products { get; set; }
     }
 }

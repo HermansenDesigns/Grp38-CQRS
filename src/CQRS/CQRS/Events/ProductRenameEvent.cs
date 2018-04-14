@@ -11,7 +11,7 @@ namespace CQRS.Events
         public ProductRenameEvent(Guid aggregateID,string productName)
         {
             ProductName = productName;
-            AggregateId = aggregateID; 
+            
         }
 
         public string ProductName { get; internal set; }
