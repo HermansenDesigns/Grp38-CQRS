@@ -1,0 +1,20 @@
+\section{Brug}
+Dette pattern bruges ligesom \textbf{CRUD} til at skrive til og læse fra en Database. Forskelligt fra \textbf{CRUD} er læse og skrive operationerne separeret fra hinanden. Det betyder, at dette pattern er velegnet til at indgå i følgende scenarier.
+
+\begin{itemize}  
+	\item Applikationer, hvor flere læse- og skriveoperationer foregår parallelt.
+	\item Applikationer, hvor der er behov for skalering
+	\item Applikationer, hvor skrive- og læselogik skal udvikles uafhængigt
+	\item Applikationer, hvor kompleksiteten overstiger en simpel CRUD implementering
+	\item Applikationer, hvor domænet og forretningslogikken overstiger en vis kompleksitet
+	\item \ldots
+	
+\end{itemize}
+
+Grunden til, at \textbf{CQRS} er velegnet til disse anvendelser er, at kommandoerne kan udvikles med en grad af tilpassethed, hvilket betyder at problemer i forbindelse med sammenfletning af data kan formindskes betydeligt.
+Ved brug af \textbf{CQRS} og derved separeret udvikling af læse/skriveoperationer muliggøres det også, at lade mere af forretningslogikken indgå i skrive operationerne uden at dette påvirker læsningen.
+
+\textbf{CQRS} er særdeles anvendeligt ved skalering af komplekse systemer, da det ofte er gældende, at der er uligevægt i antallet læse- og skriveoperationer. Det medvirker til, at den separerede udvikling af disse er eftertragtet.
+ 
+
+
