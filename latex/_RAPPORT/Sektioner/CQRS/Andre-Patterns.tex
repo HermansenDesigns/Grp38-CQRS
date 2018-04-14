@@ -22,12 +22,14 @@ På understående figur \ref{fig:CRUDimpl} nedenfor kan det ses, hvordan \textbf
 \end{figure}
 
 
-Ved at separere læse og skrive operationerne opnås skaleringsmuligheder der med \textbf{CRUD} ikke er mulige. Dette skyldes, at disse ikke skal udvikeles 1:1.\newline
+Ved at separere læse og skrive operationerne opnås skaleringsmuligheder der med \textbf{CRUD} ikke er mulige. Grunden til dette er individualiseringen af både læse og skriver klasser, samt de afhængigheder de ikke deler.\newline
 
-Den største forskel på de to patterns udspiller sig i, at \textbf{CRUD} udvikles med \textbf{DDD} \textbf{D}omain \textbf{D}riven \textbf{D}esign, hvorimod \textbf{CQRS} udvikles i et Begivenhedsdrevet design (Event Driven Design). som navnene antyder bliver det domæne drevne design bygget op af domæner som figurer i den virkelige verden, hvorimod eventdriven design er bygget op om begivenheder der sker. som f.eks. at en kunde bestiller en kop kaffe.
+Derudover behøver disse ikke at udvikles 1:1.\newline
+
+Den største forskel på de to patterns udspiller sig i, at \textbf{CRUD} udvikles som regel med \textbf{DDD} \textbf{D}omain \textbf{D}riven \textbf{D}esign, hvorimod \textbf{CQRS} udvikles ofte i et begivenhedsdrevet design (Event Driven Design). som navnene antyder bliver det domæne drevne design bygget op af domæner som figurer i den virkelige verden, hvorimod eventdriven design er bygget op om begivenheder der sker. som f.eks. at en kunde bestiller en kop kaffe.
 
 Ved til dels at opbygget et system om det eventdrevne princip og at adskille læse/skrive-operationer mødes nogle problematikker som skal løses. Disse problemer gør, at \textbf{CQRS} kun bruges når systemet opnår en vis størrelse og kompleksitet, men at \textbf{CQRS} forstrækkes når dette niveau opnås.\newline
 
-Ved implementering af \textbf{CQRS} gøres der brug af eventsourcing, som også vil blive omtalt herefter. I korte træk er det den del der sørger for, at fuldende den eventdrevne tankegang og underbygge reaktion indbydes i pattern'et.
+Ved implementering af \textbf{CQRS} gøres der brug af eventsourcing, som også vil blive omtalt herefter. I korte træk er det den del der sørger for, at fuldende den eventdrevne tankegang og underbygge reaktion indbyrdes i pattern'et.
 Det er dog nævneværdigt, at eventsourcing ikke er en del af selve \textbf{CQRS}-pattern'et men at det ofte bliver implementeret ved brug af \textbf{CQRS}, da man på den måde løser nogle af ovenstående problemer.
 

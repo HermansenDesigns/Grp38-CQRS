@@ -1,6 +1,6 @@
 \section{Struktur}
 
-\paragraph{Event sourcing} består af en sekvens af Events, som er gemt i en Event store af en eller anden format (SQL, noSQL etc.) og bliver som regel brugt som en log, hvor i klasser kan se historiken af objekter, via. events. 
+\paragraph{Event sourcing} består af en sekvens af Events, som er gemt i en Event store af et eller anden format (SQL, noSQL, etc.) og bliver som regel brugt som en log, hvor i klasser kan se historiken af objekter, via. events. 
 
 \begin{figure}[H]
     \centering
@@ -9,7 +9,7 @@
     \label{fig:service-model}
 \end{figure}
 
-På figur \ref{fig:service-model}, er der en simpel service, der gør et eller andet med et objekt, hvad den gør er underordnet, men den påvirker Obj på en eller anden måde. I et system uden Event sourcing, vil den tidligere stadie af objektet være destrueret og glemt. 
+På figur \ref{fig:service-model}, er der en simpel service, der gør et eller andet med et objekt, hvad den gør er underordnet, men den påvirker Obj på en eller anden måde. I et system uden Event sourcing, vil det tidligere stadie af objektet være destrueret og glemt.
 
 \begin{figure}[H]
     \centering
