@@ -1,0 +1,45 @@
+\documentclass[a4paper,openany]{memoir}
+
+%*******************************************************************************
+%ÆNDRINGER LAVES HER
+%*******************************************************************************
+\title{CQRS Architectural Pattern}
+
+%-------------------------------------------------------------------------------
+% Sæt data til forside. Kan kommenteres ind efter behov.
+\newcommand{\frontpageDate}{12-04-2018}  % Samme dato der vises i sidefod
+%\newcommand{\frontpageImage}{ImageName.png}
+%\newcommand{\frontpageCharacters}{NumberOfCharacters}
+%*******************************************************************************
+
+% Inkluder preambles
+\usepackage{../SharedPreamble}
+\usepackage{PrivatePreamble}
+
+\begin{document}
+
+	\import{../}{Forside}  \newpage
+	\tableofcontents\thispagestyle{fancy}  \newpage
+	\import{Sektioner/}{Intro}  \newpage
+
+	\import{Sektioner/CQRS/}{Intro}
+	\import{Sektioner/CQRS/}{Brug}
+	\import{Sektioner/CQRS/}{Type}
+	\import{Sektioner/CQRS/}{Struktur}
+	\import{Sektioner/CQRS/}{Konsekvens}
+	\import{Sektioner/CQRS/}{Andre-Patterns}
+	
+	\import{Sektioner/Event-Sourcing/}{Intro}
+	\import{Sektioner/Event-Sourcing/}{Brug}
+	\import{Sektioner/Event-Sourcing/}{Struktur}
+	\import{Sektioner/Event-Sourcing/}{Konsekvens}
+
+	\import{Sektioner/}{Implementation}
+	\import{Sektioner/}{Demonstration}
+	\import{Sektioner/}{Diskussion}
+	\import{Sektioner/}{Konklusion}\newpage
+
+	\printbibliography
+	\listoffixmes
+	
+\end{document}
