@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    class ProductFull
+    public class ProductFull
     {
         public Guid Id { get; set; }
         public string ProductName { get; set; }

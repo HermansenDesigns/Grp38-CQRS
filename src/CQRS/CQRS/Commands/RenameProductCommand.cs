@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    class RenameProductCommand : Command
+    public class RenameProductCommand : Command
     {
         public readonly string ProductName;
 

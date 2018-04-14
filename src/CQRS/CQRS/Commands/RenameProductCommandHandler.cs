@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    class Handlers
-    {
+    
         public class RenameProductCommandHandler : ICommandHandler<RenameProductCommand>
         {
             private Repository<ProductFull> _repository;
 
-            public RenameProductCommandHandler(Repository<ProductFull> repository)
-            {
-                _repository = repository;
-            }
+        public RenameProductCommandHandler(Repository<ProductFull> repository)
+        {
+            _repository = repository;
+        }
 
-            public void Execute(RenameProductCommand command)
+        public void Execute(RenameProductCommand command)
             {
                 if (command == null || _repository==null)
                 {
@@ -30,5 +29,5 @@ namespace CQRS
                 _repository.save(item,item.Version); 
             }
         }
-    }
+    
 }

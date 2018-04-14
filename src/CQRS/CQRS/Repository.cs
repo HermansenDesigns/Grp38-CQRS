@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CQRS
 {
-    class Repository<TEntity>
+    public class Repository<TEntity>
     {
         private CQRSContext _context;
 
