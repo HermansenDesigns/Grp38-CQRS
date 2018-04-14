@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CQRS
 {
-    class CQRSContext : DbContext
+    public class CQRSContext : DbContext
     {
         public CQRSContext()
         {
