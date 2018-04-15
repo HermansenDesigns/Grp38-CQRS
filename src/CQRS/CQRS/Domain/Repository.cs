@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace CQRS
+namespace CQRS.Domain
 {
-    public abstract class Repository<TEntity> where TEntity : class 
+    public class Repository<TEntity> where TEntity : class 
     {
-        private CQRSContext _context;
+        private UserGroupContext _context;
 
-        public Repository(CQRSContext context)
+        public Repository(UserGroupContext context)
         {
             _context = context;
         }
@@ -20,6 +15,11 @@ namespace CQRS
         public IQueryable<TEntity> GetAll()
         {
             return _context.Set<TEntity>().AsQueryable(); 
+        }
+
+        public TEntity Find(long id)
+        {
+            return _context.Find<TEntity>(id);
         }
 
         public void Add(TEntity entity)

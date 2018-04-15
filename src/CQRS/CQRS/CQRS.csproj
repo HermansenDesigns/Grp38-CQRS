@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{91AB2005-0AED-440F-96FB-0972E9D5A172}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>CQRS</RootNamespace>
     <AssemblyName>CQRS</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -246,22 +249,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="CQRSContext.cs" />
+    <Compile Include="Commands\Handlers.cs" />
+    <Compile Include="Commands\JoinGroupCommand.cs" />
+    <Compile Include="Domain\UserGroupContext.cs" />
+    <Compile Include="Domain\Group.cs" />
+    <Compile Include="Domain\User.cs" />
     <Compile Include="Events\Event.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\IHandle.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Events\ProductRenameEvent.cs" />
-    <Compile Include="Events\ProductRenameEventHandler.cs" />
-    <Compile Include="ProductFull.cs" />
-    <Compile Include="ProductFullRepository.cs" />
-    <Compile Include="ProductQuick.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\RenameProductCommand.cs" />
-    <Compile Include="Commands\RenameProductCommandHandler.cs" />
-    <Compile Include="ReadContext.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="Commands\RenameUserCommand.cs" />
+    <Compile Include="Query\GroupDisplay.cs" />
+    <Compile Include="Query\GroupsView.cs" />
+    <Compile Include="Query\Queries.cs" />
+    <Compile Include="Query\UserDisplay.cs" />
+    <Compile Include="Domain\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -271,5 +276,6 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
