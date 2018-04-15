@@ -1,1 +1,13 @@
 \chapter{Diskussion}
+Ideen med at dele læsning og skriving af data op, bliver i større designløsninger mere relevant. 
+I dag bliver mange systemer større og mere komplekse, argumentet for det er samme som virksomhederne, der bruger disse systemer. Enten fordi der er flere brugere eller fordi virksomheder går sammen for at spare midler og udnytter fælles synergier.
+Bliver store datamængder brugt i større systemer, hvor oppetid og ydeevne er foretrukket, vil det være en stor fordel at udnytte \textbf{CQRS}. 
+Vi læser mere ved hjælp af API'er end vi nogenside har gjort, og i den forbindelse er \textbf{CQRS} en fordel. Komplekse systmer der har enheder, der kun indeholder data, og hvor andre elementer er delt op, er i sidste ende muligheden for at lave service på en del, uden det nedlægger hele systemet.
+Derudover er der flere fordele ved at have flere services der læser eller bliver skrevet til:\
+\begin{itemize}
+    \item Ofte bliver der læst mere data end der bliver skrevet.
+    \item Når vi læser data, får vi typisk store mængder data ind. Når vi skriver, skriver vi altid kun til enkelte elementer af data, som kun påvirker ét aggregat.
+    \item Fra en slutbrugers synspunkt, skal det at kunne læse data altid yde bedre end når vi skriver. Da en slutbruger typisk nemmere kan acceptere at vente på at skrive, end at vente på at kunne læse.
+\end{itemize}
+\
+Når man tilføjer event sourcing til systemer, der ofte er stora
