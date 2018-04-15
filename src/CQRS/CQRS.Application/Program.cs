@@ -11,17 +11,28 @@ namespace CQRS.Application
 {
     static class ExtensionHelpers
     {
-        public static void AddGroup(this Queries readModel, string name)
+        public static AddGroupCommand AddGroup(string name)
         {
-
+            return new AddGroupCommand(1,name);
         }
-        public static void AddUser(this Queries readModel, DateTime age, string name)
+        public static AddUserCommand AddUser(DateTime age, string name)
         {
-
+            return new AddUserCommand(1, age, name);
         }
-        public static void RenameUser(this Queries readModel, string name)
+        public static RenameUserCommand RenameUser(this UserDisplay user, string name)
         {
+            var version = 1;
+            if (user.LatestRenameUserCommand != null)
+                version = user.LatestRenameUserCommand.Version + 1;
+            return new RenameUserCommand(name,version,user.Name,user.Id);
+        }
 
+        public static JoinGroupCommand JoinGroup(this GroupsDisplay group, long userId)
+        {
+            var version = 1;
+            if (group.LatestJoinGroupCommand != null)
+                version = group.LatestJoinGroupCommand.Version + 1;
+            return new JoinGroupCommand(version,userId,group.Id);
         }
        
     }
@@ -32,32 +43,55 @@ namespace CQRS.Application
         {
             var writeModel = new Handlers();
             var readModel = new Queries();
-
+            
             //Add test data using commands
-            writeModel.Handle(new AddGroupCommand(0, "De onde"));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(1991, 1, 13), "Scar"));
-            writeModel.Handle(new JoinGroupCommand(0, 1, 1));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(2000, 2, 12), "Shenzi"));
-            writeModel.Handle(new JoinGroupCommand(0, 2, 1));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(1448, 3, 11), "Banzai"));
-            writeModel.Handle(new JoinGroupCommand(0, 3, 1));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(1998, 4, 10), "Ed"));
-            writeModel.Handle(new JoinGroupCommand(0, 4, 1));
-            writeModel.Handle(new RenameUserCommand("Ib", 0, "Ed", 3));
+            writeModel.Handle(ExtensionHelpers.AddGroup("De onde"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(1991, 1, 13), "Scar"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(2000, 2, 12), "Shenzi"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(1448, 3, 11), "Banzai"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(1998, 4, 10), "Ed"));
 
-            writeModel.Handle(new AddGroupCommand(0, "De gode"));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(1991, 1, 1), "Mufasa"));
-            writeModel.Handle(new JoinGroupCommand(0, 5, 2));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(2005, 4, 1), "Simba"));
-            writeModel.Handle(new JoinGroupCommand(0, 6, 2));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(1950, 4, 1), "Timon"));
-            writeModel.Handle(new JoinGroupCommand(0, 7, 2));
-            writeModel.Handle(new AddUserCommand(0, new DateTime(1950, 8, 1), "Pumba"));
-            writeModel.Handle(new JoinGroupCommand(0, 8, 2));
+            {
+                var deOnde = readModel.GetAllGroups().FirstOrDefault(group => group.Name == "De onde");
+                var scar = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Scar");
+                var shenzi = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Shenzi");
+                var banzai = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Banzai");
+                var ed = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Ed");
+                writeModel.Handle(deOnde.JoinGroup(scar.Id));
+                writeModel.Handle(deOnde.JoinGroup(shenzi.Id));
+                writeModel.Handle(deOnde.JoinGroup(banzai.Id));
+                writeModel.Handle(deOnde.JoinGroup(ed.Id));
+
+                writeModel.Handle(ed.RenameUser("Ib!"));
+
+            }
+            
+            writeModel.Handle(ExtensionHelpers.AddGroup("De gode"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(1991, 1, 1), "Mufasa"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(2005, 4, 1), "Simba"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(1950, 4, 1), "Timon"));
+            writeModel.Handle(ExtensionHelpers.AddUser(new DateTime(1950, 8, 1), "Pumba"));
+
+            {
+                var deGode = readModel.GetAllGroups().FirstOrDefault(group => group.Name == "De gode");
+                var Mufasa = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Mufasa");
+                var Simba = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Simba");
+                var Timon = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Timon");
+                var Pumba = readModel.GetAllUsers().FirstOrDefault(user => user.Name == "Pumba");
+                writeModel.Handle(deGode.JoinGroup(Mufasa.Id));
+                writeModel.Handle(deGode.JoinGroup(Simba.Id));
+                writeModel.Handle(deGode.JoinGroup(Timon.Id));
+                writeModel.Handle(deGode.JoinGroup(Pumba.Id));
+
+                
+
+            }
 
             try
             {
-               
+                int groupnr = ShowGroups(readModel);
+                int memberNr = ShowMembers(readModel.GetAllGroups().FirstOrDefault(group => group.Id == groupnr));
+                ShowMember(readModel.GetAllUsers().FirstOrDefault(user => user.Id == memberNr));
             }
             catch (Exception e)
             {
@@ -67,19 +101,19 @@ namespace CQRS.Application
 
         public static int ShowGroups(Queries readModel)
         {
-           // foreach (var group in readModel.GetAllGroups())
+            foreach (var group in readModel.GetAllGroups())
             {
-          //      Console.WriteLine(group.Name + " with id: "+group.Id);
+                Console.WriteLine(group.Name + " with id: "+group.Id);
             }
             Console.WriteLine("Write an id to show members:");
             return Convert.ToInt32(Console.ReadLine());
         }
-        public static int ShowMembers(GroupDisplay group)
+        public static int ShowMembers(GroupsDisplay group)
         {
-         //   Console.WriteLine("Members:");
+            Console.WriteLine("Members:");
             foreach (var member in group.Members)
             {
-         //       Console.WriteLine(member.Item1 + " with id: " + member.Item2);
+                Console.WriteLine(member.Name + " with id: " + member.Id);
             }
             Console.WriteLine("Write an id to show details:");
             return Convert.ToInt32(Console.ReadLine());

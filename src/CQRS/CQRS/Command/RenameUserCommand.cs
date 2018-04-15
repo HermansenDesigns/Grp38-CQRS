@@ -18,5 +18,9 @@ namespace CQRS.Command
             UserId = userId;
             NewName = newName;
         }
+        public RenameUserCommand() : base(0)
+        {
+
+        }
     }
 }

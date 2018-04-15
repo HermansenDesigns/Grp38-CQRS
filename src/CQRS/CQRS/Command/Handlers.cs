@@ -28,7 +28,7 @@ namespace CQRS.Command
             if (userHasBeenCreated.Count()!=1) return;
 
             //Add command to list of commands
-            _renameUserCommand.AddItem(command);
+            _renameUserCommand.CheckVersionAndAddItem(user => user.UserId == command.UserId, command);
             _context.SaveChanges();
 
             //Invoke event
@@ -40,10 +40,10 @@ namespace CQRS.Command
         {
             //Check if group has ever been created
             var groupHasBeenCreated = _addGroupRepository.Find(group => group.GroupId == command.GroupId);
-            if (groupHasBeenCreated.Count() != 1) return;
+            if (!groupHasBeenCreated.Any()) return;
 
             //Add command to list of commands
-            _joinGroupRepository.AddItem(command);
+            _joinGroupRepository.CheckVersionAndAddItem(group => group.GroupId == command.GroupId, command);
             _context.SaveChanges();
 
             //Invoke event
@@ -57,7 +57,7 @@ namespace CQRS.Command
             if (userHasBeenCreated.Any()) return;
 
             //Add command to list of commands
-            _addUserRepository.AddItem(command);
+            _addUserRepository.CheckVersionAndAddItem(user => user.UserId == command.UserId, command);
             _context.SaveChanges();
 
             //Invoke event
@@ -66,11 +66,11 @@ namespace CQRS.Command
         public void Handle(AddGroupCommand command)
         {
             //Check if group has already been created
-            var userHasBeenCreated = _addGroupRepository.Find(group => group.GroupId == command.GroupId);
-            if (userHasBeenCreated.Count() != 1) return;
+            var groupHasBeenCreated = _addGroupRepository.Find(group => group.GroupId == command.GroupId);
+            if (groupHasBeenCreated.Any()) return;
 
             //Add command to list of commands
-            _addGroupRepository.AddItem(command);
+            _addGroupRepository.CheckVersionAndAddItem(group => group.GroupId == command.GroupId, command);
             _context.SaveChanges();
 
             //Invoke event

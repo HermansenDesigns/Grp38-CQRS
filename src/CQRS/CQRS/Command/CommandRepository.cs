@@ -23,15 +23,22 @@ namespace CQRS.Command
             return !orderedByVersion.Any() ? null : orderedByVersion.Last();
         }
 
-        public void AddItem(TEntity entity)
+        public void CheckVersionAndAddItem(Func<TEntity, bool> where, TEntity entity)
         {
-            var latest = GetLatest();
+            var colllection = Find(where);
             var expectedVersion = 0;
-            if(latest != null)
-                expectedVersion = GetLatest().Version + 1;
-            if(entity.Version != expectedVersion)
+            if (colllection.Any())
+            {
+                expectedVersion = colllection.ToList().OrderBy(item => item.Version).Last().Version;
+            }
+            if (entity.Version != (expectedVersion + 1))
                 throw new ArgumentException();
-            _set.Add(entity);
+            AddItem(entity);
+        }
+
+        private void AddItem(TEntity entity)
+        {
+           _set.Add(entity);
         }
 
         public IEnumerable<TEntity> Find(Func<TEntity, bool> where)

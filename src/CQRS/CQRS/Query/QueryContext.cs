@@ -26,8 +26,7 @@ namespace CQRS.Query
             }
         }
 
-        public DbSet<GroupDisplay> GroupDisplays { get; set; }
-        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupsDisplay> Groups { get; set; }
         public DbSet<UserDisplay> UserDisplays { get; set; }
 
     }

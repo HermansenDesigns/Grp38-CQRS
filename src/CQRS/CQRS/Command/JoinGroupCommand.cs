@@ -19,6 +19,11 @@ namespace CQRS.Command
             GroupId = groupId;
         }
 
+        public JoinGroupCommand() : base(0)
+        {
+
+        }
+
     }
     
 }

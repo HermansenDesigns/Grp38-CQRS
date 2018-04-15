@@ -8,20 +8,19 @@ using CQRS.Command;
 
 namespace CQRS.Query
 {
-    public class UserDisplay
+    public class GroupsDisplay
     {
-        public RenameUserCommand LatestRenameUserCommand { get; set; }
-        public UserDisplay(long id, string name, DateTime age)
+        public JoinGroupCommand LatestJoinGroupCommand { get; set; }
+        public GroupsDisplay(long id, string name)
         {
             Id = id;
             Name = name;
-            Age = age;
         }
         [Key]
         public long LocalId { get; set; }
         public long Id { get; set; }
         public string Name { get; set; }
-        public DateTime Age { get; set; }
-        
+
+        public virtual List<UserDisplay> Members { get; set; }
     }
 }

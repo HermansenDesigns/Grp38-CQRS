@@ -11,10 +11,10 @@ namespace CQRS.Query
     public class Queries : ICommandAppliable<AddGroupCommand>, ICommandAppliable<AddUserCommand>, ICommandAppliable<JoinGroupCommand>, ICommandAppliable<RenameUserCommand>
     {
         private readonly QueryContext _context;
-        public AddGroupCommand LatestAddGroupCommand { get; set; }
-        public AddUserCommand LatestAddUserCommand { get; set; }
-        public JoinGroupCommand LatestJoinGroupCommand { get; set; }
-        public RenameUserCommand LatestRenameUserCommand { get; set; }
+        
+        
+        
+        
         public Queries()
         {
             _context = new QueryContext();
@@ -23,18 +23,35 @@ namespace CQRS.Query
             Events.CommandEvents.GroupAdded += Apply;
             Events.CommandEvents.UserAdded += Apply;
             Events.CommandEvents.UserRenamed += Apply;
-            Events.CommandEvents.GroupAdded += Apply;
+            Events.CommandEvents.UserJoinedGroup += Apply;
         }
+
+        #region Repository
+
+        public List<GroupsDisplay> GetAllGroups()
+        {
+            return _context.Groups.ToList();
+        }
+        public List<UserDisplay> GetAllUsers()
+        {
+            return _context.UserDisplays.ToList();
+        }
+
+
+        #endregion
+
+
+
         public void Apply(AddGroupCommand entity)
         {
-            _context.Groups.Add(new Group(entity.GroupId, entity.Name));
-            LatestAddGroupCommand = entity;
+            _context.Groups.Add(new GroupsDisplay(entity.GroupId, entity.Name));
+            _context.SaveChanges();
         }
 
         public void Apply(AddUserCommand entity)
         {
             _context.UserDisplays.Add(new UserDisplay(entity.UserId, entity.Name, entity.Age));
-            LatestAddUserCommand = entity;
+            _context.SaveChanges();
         }
 
         public void Apply(JoinGroupCommand entity)
@@ -43,15 +60,19 @@ namespace CQRS.Query
             var user = _context.UserDisplays.Find(entity.UserId);
             if (group == null || user == null)
                 return;
-            _context.GroupDisplays.Find(entity.GroupId).Members.Add(user);
-            LatestJoinGroupCommand = entity;
+            if(group.Members == null)
+                group.Members = new List<UserDisplay>();
+            group.Members.Add(user);
+            group.LatestJoinGroupCommand = entity;
+            _context.SaveChanges();
         }
 
         public void Apply(RenameUserCommand entity)
         {
             var user = _context.UserDisplays.Find(entity.UserId);
             user.Name = entity.NewName;
-            LatestRenameUserCommand = entity;
+            user.LatestRenameUserCommand = entity;
+            _context.SaveChanges();
         }
     }
 }
