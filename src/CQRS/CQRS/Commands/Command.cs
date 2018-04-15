@@ -8,9 +8,9 @@ namespace CQRS
 {
     public class Command : ICommand
     {
-        public Command(Guid id, int version)
+        public Command(int version)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             Version = version;
         }
 
