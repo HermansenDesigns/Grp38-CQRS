@@ -16,7 +16,7 @@ namespace CQRS
         {
             OldName = oldName;
             UserId = userId;
-            newName = newName;
+            NewName = newName;
         }
     }
 }
