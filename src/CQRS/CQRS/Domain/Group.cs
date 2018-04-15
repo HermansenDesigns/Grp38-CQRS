@@ -9,7 +9,7 @@ namespace CQRS.Domain
 {
     public class Group
     {
-        public List<User> Members { get; set; }
+        public virtual List<User> Members { get; set; }
         public string Name { get; set; }
         public int Score { get; set; }
         public long Id { get; set; }

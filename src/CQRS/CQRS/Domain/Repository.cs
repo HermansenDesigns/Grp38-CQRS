@@ -37,8 +37,9 @@ namespace CQRS.Domain
             _context.Entry(entity).State = EntityState.Modified; 
         }
 
-        public virtual void Save(TEntity entity, int expectedversion)
+        public virtual void Save()
         {
+            //TEntity entity, int expectedversion
             _context.SaveChanges(); 
         }
     }
