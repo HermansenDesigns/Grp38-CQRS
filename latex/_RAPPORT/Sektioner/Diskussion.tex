@@ -1,15 +1,17 @@
 \chapter{Diskussion}
+Når man tilføjer \textbf{CQRS} og Event Sourcing til et komplekst software system, med mange objekter, data modeller, historik og samtidige problemstillinger, kan \textbf{CQRS} gøre overblikket meget nemmere, da man har nemmere ved at dele tingene op udviklingsmæssigt, ved at fordele ansvaret for ud på flere udviklere.
+Det kræver at man som udvikler tænker lidt anderledes i forhold til at være problemløsende, men baggrunden er at man kan uddele opgaver til andre udviklere som ikke kender til den forretningsudviklingen.
+Ved at bruge Event Sourcing, bliver systemet dog en del mere komplekst, da man med Event Sourcing laver versions historik, når man skriver eller eventuelt når man læser. Event Sourcing vil derfor indføre et sværere system at implementere, da alle læs og skrive dele, stemples med versionshistorik. Her er GitHub et godt eksempel, da de har mange API til forskellige eksterne programmer, altså forskellige services. Alt bliver dokumenteret, dog kun på skrive siden, derfor kan man argumentere for at GitHub er Event Sourcing.
+På den måde kan man sige at det ikke er et nyt koncept, der er mange systemer som har fungeret på samme måde i rigtig mange år f.eks Bankverdenen, hvor man altid har kunnet se transaktioner. Et andet eksempel, hvor historik for læsning bliver udnyttet er, når man f.eks bruger Facebook eller en anden stor platform til at logge in med på andre platforme.
+Hvilket også er grunden til at Event Sourcing og \textbf{CQRS} hænger så godt sammen.
+\
 Ideen med at dele læsning og skriving af data op, bliver i større designløsninger mere relevant. 
 I dag bliver mange systemer større og mere komplekse, argumentet for det er samme som virksomhederne, der bruger disse systemer. Enten fordi der er flere brugere eller fordi virksomheder går sammen for at spare midler og udnytter fælles synergier.
-Bliver store datamængder brugt i større systemer, hvor oppetid og ydeevne er foretrukket, vil det være en stor fordel at udnytte \textbf{CQRS}. \fixme{Giv belæg for argument.}
-Vi læser mere ved hjælp af API'er end vi nogenside har gjort, og i den forbindelse er \textbf{CQRS} en fordel. Komplekse systmer der har enheder, der kun indeholder data, og hvor andre elementer er delt op, er i sidste ende muligheden for at lave service på en del, uden det nedlægger hele systemet. \fixme{Giv belæg for argument.}
+Bliver store datamængder brugt i større systemer, hvor oppetid og ydeevne er foretrukket, vil det være en stor fordel at udnytte \textbf{CQRS}. Fordelen udviklingsmæssigt, er at man på den måde har mere overblik, da flere services der læser kan håndtere det samme data, og på samme måde, når der skal skrives. Hvilket også argumenterer for hvorfor \textbf{CQRS} for sig selv, er relativt simpelt. Men når Event Sourcing implementeres vil de services der udfører operationerne, således det i events, så der på den måde er versionshistorik.. Et godt eksempel er bankverdenen, hvor penge flyver rundt
+Vi læser mere ved hjælp af API'er end vi nogenside har gjort, og i den forbindelse er \textbf{CQRS} en fordel. Komplekse systmer der har enheder, der kun indeholder data, og hvor andre elementer er delt op, er i sidste ende muligheden for at lave service på en del, uden det nedlægger hele systemet, hvor overnævnte eksempel med API'er mellem systemer bliver mere og mere relevant. 
 Derudover er der flere fordele ved at have flere services der læser eller bliver skrevet til:\
 \begin{itemize}
     \item Ofte bliver der læst mere data end der bliver skrevet.
-    \item Når vi læser data, får vi typisk store mængder data ind. Når vi skriver, skriver vi altid kun til enkelte elementer af data, som kun påvirker ét aggregat.
+    \item Når vi læser data, får vi større mængder data ind. Når vi skriver, skriver vi altid kun til enkelte elementer af data, som kun påvirker ét aggregat.
     \item Fra en slutbrugers synspunkt, skal det at kunne læse data altid yde bedre end når vi skriver. Da en slutbruger typisk nemmere kan acceptere at vente på at skrive, end at vente på at kunne læse.
 \end{itemize}
-\
-Når man tilføjer event sourcing til systemer, der ofte er stor
-
-\fixme{Start ud med hvorfor vi gerne vil bruge Event sourcing, og hvad konsekvensen er. og Hvorfor er det vigtigt i forhold til CQRS.}
