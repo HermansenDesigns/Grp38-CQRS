@@ -1,53 +1,80 @@
 ﻿using System.Collections.Generic;
-using CQRS.Domain;
+using System.Diagnostics.Tracing;
+using System.Linq;
+using Microsoft.CodeAnalysis.Operations;
 
 namespace CQRS.Command
 {
     public class Handlers
     {
-        private readonly Repository<User> _userRepo;
-        private readonly Repository<Group> _groupRepo;
+        private readonly CommandsContext _context;
+        private readonly CommandRepository<AddGroupCommand> _addGroupRepository;
+        private readonly CommandRepository<JoinGroupCommand> _joinGroupRepository;
+        private readonly CommandRepository<AddUserCommand> _addUserRepository;
+        private readonly CommandRepository<RenameUserCommand> _renameUserCommand;
 
-        public Handlers(UserGroupContext context)
+        public Handlers()
         {
-            _userRepo = new Repository<User>(context);
-            _groupRepo = new Repository<Group>(context);
+            _context = new CommandsContext();
+            _addGroupRepository = new CommandRepository<AddGroupCommand>(_context.AddGroupCommands);
+            _joinGroupRepository = new CommandRepository<JoinGroupCommand>(_context.JoinGroupCommands);
+            _addUserRepository = new CommandRepository<AddUserCommand>(_context.AddUserCommands);
+            _renameUserCommand = new CommandRepository<RenameUserCommand>(_context.RenameUserCommands);
         }
-
         public void Handle(RenameUserCommand command)
         {
-            var user = _userRepo.Find(command.UserId);
-            if (user == null || user.Name != command.OldName) return;
-            user.Name = command.NewName;
-            _userRepo.Save();
+            //Check if user has ever been created
+            var userHasBeenCreated = _addUserRepository.Find(user => user.UserId == command.UserId);
+            if (userHasBeenCreated.Count()!=1) return;
+
+            //Add command to list of commands
+            _renameUserCommand.AddItem(command);
+            _context.SaveChanges();
+
+            //Invoke event
+            Events.CommandEvents.OnUserRenamed(command);
+
         }
 
         public void Handle(JoinGroupCommand command)
         {
-            var user = _userRepo.Find(command.UserId);
-            var group = _groupRepo.Find(command.GroupId);
-            if (user == null || group == null) return;
+            //Check if group has ever been created
+            var groupHasBeenCreated = _addGroupRepository.Find(group => group.GroupId == command.GroupId);
+            if (groupHasBeenCreated.Count() != 1) return;
 
-            if(group.Members == null)
-                group.Members = new List<User>();
-            else if (group.Members.Contains(user))
-                return;
-            group.Members.Add(user);
-            _groupRepo.Save();
+            //Add command to list of commands
+            _joinGroupRepository.AddItem(command);
+            _context.SaveChanges();
 
+            //Invoke event
+            Events.CommandEvents.OnUserJoinedGroup(command);
         }
 
         public void Handle(AddUserCommand command)
         {
-            var user = new User {Age = command.Age, Name = command.Name};
-            _userRepo.Add(user);
-            _userRepo.Save();
+            //Check if user has already been created
+            var userHasBeenCreated = _addUserRepository.Find(user => user.UserId == command.UserId);
+            if (userHasBeenCreated.Any()) return;
+
+            //Add command to list of commands
+            _addUserRepository.AddItem(command);
+            _context.SaveChanges();
+
+            //Invoke event
+            Events.CommandEvents.OnUserAdded(command);
         }
         public void Handle(AddGroupCommand command)
         {
-            var group = new Group { Name = command.Name };
-            _groupRepo.Add(group);
-            _groupRepo.Save();
+            //Check if group has already been created
+            var userHasBeenCreated = _addGroupRepository.Find(group => group.GroupId == command.GroupId);
+            if (userHasBeenCreated.Count() != 1) return;
+
+            //Add command to list of commands
+            _addGroupRepository.AddItem(command);
+            _context.SaveChanges();
+
+            //Invoke event
+            Events.CommandEvents.OnGroupAdded(command);
         }
     }
 }

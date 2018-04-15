@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CQRS.Query
 {
-    public class GroupsView
+    public class Group
     {
-        public GroupsView(long id, string name)
+        public Group(long id, string name)
         {
             Id = id;
             Name = name;

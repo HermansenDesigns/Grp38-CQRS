@@ -12,6 +12,5 @@ namespace CQRS.Command
 
         public Guid Id { get; private set; }
         public int Version { get; private set; }
-        
     }
 }

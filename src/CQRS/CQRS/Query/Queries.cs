@@ -3,34 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CQRS.Domain;
+using CQRS.Command;
 using Microsoft.EntityFrameworkCore;
 
 namespace CQRS.Query
 {
-    public class Queries
+    public class Queries : ICommandAppliable<AddGroupCommand>, ICommandAppliable<AddUserCommand>, ICommandAppliable<JoinGroupCommand>, ICommandAppliable<RenameUserCommand>
     {
-        private readonly UserGroupContext _context;
-
-        public Queries(UserGroupContext context)
+        private readonly QueryContext _context;
+        public AddGroupCommand LatestAddGroupCommand { get; set; }
+        public AddUserCommand LatestAddUserCommand { get; set; }
+        public JoinGroupCommand LatestJoinGroupCommand { get; set; }
+        public RenameUserCommand LatestRenameUserCommand { get; set; }
+        public Queries()
         {
-            _context = context;
+            _context = new QueryContext();
+            Events.CommandEvents.GroupAdded += Apply;
+            Events.CommandEvents.UserAdded += Apply;
+            Events.CommandEvents.UserRenamed += Apply;
+            Events.CommandEvents.GroupAdded += Apply;
+        }
+        public void Apply(AddGroupCommand entity)
+        {
+            _context.Groups.Add(new Group(entity.GroupId, entity.Name));
+            LatestAddGroupCommand = entity;
         }
 
-        public ICollection<GroupsView> GetAllGroups()
+        public void Apply(AddUserCommand entity)
         {
-            return _context.Groups.Select(@group => new GroupsView(@group.Id, @group.Name)).ToList();
+            _context.UserDisplays.Add(new UserDisplay(entity.UserId, entity.Name, entity.Age));
+            LatestAddUserCommand = entity;
         }
-        public GroupDisplay GetGroupById(long Id)
-        {
-            var group = _context.Find<Group>(Id);
-            return new GroupDisplay(@group.Id, group.Members.Select(@members => new Tuple<string, long>(@members.Name,@members.Id)).ToList());
-        }
-        public UserDisplay GetUserById(long Id)
-        {
-            var user = _context.Find<User>(Id);
-            return new UserDisplay(user.Id,user.Name,user.Age);
 
+        public void Apply(JoinGroupCommand entity)
+        {
+            var group = _context.Groups.Find(entity.GroupId);
+            var user = _context.UserDisplays.Find(entity.UserId);
+            if (group == null || user == null)
+                return;
+            _context.GroupDisplays.Find(entity.GroupId).Members.Add(user);
+            LatestJoinGroupCommand = entity;
+        }
+
+        public void Apply(RenameUserCommand entity)
+        {
+            var user = _context.UserDisplays.Find(entity.UserId);
+            user.Name = entity.NewName;
+            LatestRenameUserCommand = entity;
         }
     }
 }

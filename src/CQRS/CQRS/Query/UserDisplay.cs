@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CQRS.Command;
 
 namespace CQRS.Query
 {
@@ -15,8 +16,9 @@ namespace CQRS.Query
             Age = age;
         }
 
-        public long Id { get; }
-        public string Name { get;  }
-        public DateTime Age { get;  }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public DateTime Age { get; set; }
+        
     }
 }
