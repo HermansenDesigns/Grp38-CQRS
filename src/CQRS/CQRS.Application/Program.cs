@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CQRS.Command;
 using CQRS.Query;
@@ -33,7 +34,7 @@ namespace CQRS.Application
             var readModel = new Queries();
 
             //Add test data using commands
-            writeModel.Handle(new AddGroupCommand(0,"De onde"));
+            writeModel.Handle(new AddGroupCommand(0, "De onde"));
             writeModel.Handle(new AddUserCommand(0, new DateTime(1991, 1, 13), "Scar"));
             writeModel.Handle(new JoinGroupCommand(0, 1, 1));
             writeModel.Handle(new AddUserCommand(0, new DateTime(2000, 2, 12), "Shenzi"));

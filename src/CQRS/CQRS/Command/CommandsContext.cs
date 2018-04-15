@@ -26,6 +26,11 @@ namespace CQRS.Command
             }
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<JoinGroupCommand>().HasKey(t => new {t.UserId, t.GroupId});
+        }
+
         public DbSet<AddGroupCommand> AddGroupCommands { get; set; }
         public DbSet<AddUserCommand> AddUserCommands { get; set; }
         public DbSet<JoinGroupCommand> JoinGroupCommands { get; set; }

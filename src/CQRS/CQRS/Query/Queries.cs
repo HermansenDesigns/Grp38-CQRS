@@ -18,6 +18,8 @@ namespace CQRS.Query
         public Queries()
         {
             _context = new QueryContext();
+            
+            // Only communicating over Events
             Events.CommandEvents.GroupAdded += Apply;
             Events.CommandEvents.UserAdded += Apply;
             Events.CommandEvents.UserRenamed += Apply;
