@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CQRS
+namespace CQRS.Command
 {
     public class RenameUserCommand : Command
     {
