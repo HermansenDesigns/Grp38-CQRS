@@ -1,8 +1,8 @@
 \chapter{Diskussion}
-Når man tilføjer \textbf{CQRS} og Event Sourcing til et komplekst software system, med mange objekter, data modeller, historik og samtidige problemstillinger, kan \textbf{CQRS} gøre overblikket meget nemmere, da man har nemmere ved at dele tingene op udviklingsmæssigt, ved at fordele ansvaret for ud på flere udviklere.
+Når man tilføjer \textbf{CQRS} og Event Sourcing til et komplekst software system, med mange objekter, data modeller, historik og samtidige problemstillinger, kan \textbf{CQRS} gøre overblikket meget nemmere, da man har nemmere ved at dele tingene op udviklingsmæssigt, ved at fordele ansvaret for ud på flere udviklere \fixme{Men tilføjer det ikke også en del kompleksitet i sig selv?}.
 Det kræver at man som udvikler tænker lidt anderledes i forhold til at være problemløsende, men baggrunden er at man kan uddele opgaver til andre udviklere, som ikke kender til den forretningsmodellen.
-Ved at bruge Event Sourcing, bliver systemet dog en del mere komplekst, da man med Event Sourcing laver versions historik, når man skriver eller eventuelt når man læser. Event Sourcing vil derfor indføre et sværere system at implementere, da alle læs og skrive dele, stemples med versionshistorik. Her er GitHub et godt eksempel, da de har mange API til forskellige eksterne programmer, altså forskellige services. Alt bliver dokumenteret, dog kun på skrive siden, derfor kan man argumentere for at GitHub er Event Sourcing.
-På den måde kan man sige, at det ikke er et nyt koncept, der er mange systemer som har fungeret på samme måde i rigtig mange år f.eks Bankverdenen, hvor man altid har kunnet se transaktioner. Et andet eksempel, hvor historik for læsning bliver udnyttet er, når man f.eks bruger Facebook eller en anden stor platform til at logge in med på andre platforme.
+Ved at bruge Event Sourcing, bliver systemet dog en del mere komplekst, da man med Event Sourcing laver versions historik, når man skriver eller eventuelt når man læser \fixme{kræver lidt mere udbydelse, hvis det ikke skal misforståes}. Event Sourcing vil derfor indføre et sværere system at implementere, da alle læs og skrive dele, stemples med versionshistorik. Her er GitHub et godt eksempel, da de har mange API til forskellige eksterne programmer, altså forskellige services. Alt bliver dokumenteret, dog kun på skrive siden, derfor kan man argumentere for at GitHub er Event Sourcing.
+På den måde kan man sige, at det ikke er et nyt koncept \fix{Ikke så vigtigt for en diskussion}, der er mange systemer som har fungeret på samme måde i rigtig mange år f.eks Bankverdenen, hvor man altid har kunnet se transaktioner. Et andet eksempel, hvor historik for læsning bliver udnyttet er, når man f.eks bruger Facebook eller en anden stor platform til at logge in med på andre platforme.
 Hvilket også er grunden til at Event Sourcing og \textbf{CQRS} hænger så godt sammen.
 \newline
 \newline
@@ -16,3 +16,5 @@ Derudover er der flere fordele, ved at have flere services der læser eller bliv
     \item Når vi læser data, får vi større mængder data ind. Når vi skriver, skriver vi altid kun til enkelte elementer af data, som kun påvirker ét aggregat.
     \item Fra en slutbrugers synspunkt, skal det at kunne læse data altid yde bedre end når vi skriver. Da en slutbruger typisk nemmere kan acceptere at vente på at skrive, end at vente på at kunne læse.
 \end{itemize}
+
+\fixme{der mangler en konklusion på diskussionen i forhold til listen af punker}
