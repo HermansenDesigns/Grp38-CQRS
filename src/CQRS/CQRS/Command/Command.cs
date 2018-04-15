@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CQRS
+namespace CQRS.Command
 {
     public class Command : ICommand
     {
-        public Command(Guid id, int version)
+        public Command(int version)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             Version = version;
         }
 
