@@ -24,6 +24,7 @@ Event Sourcing er ofte brugt sammen med \textbf{CQRS}, da dette kan medvirke til
 	\caption{Simpel CQRS med Read og Write}
 	\label{fig:cqrs-ES_model}
 \end{figure}
-\fxnote{Ændre til nyt billede hvor ES er tilføjet og ændre billedtekst}
 
-På ovenstående figur \ref{fig:cqrs-ES_model} er det vist, hvor Event Sourcing tilføjes til \textbf{CQRS}-pattern'et, og hvordan dennes effekt indtræffer. Her ses det at skrivesiden kan opdatere Event Store og dermed notificere læsesiden, som nu ved at der er ny data tilgængelig, og kan nu foretage en ny iteration af Event Store'ens events.
+På ovenstående figur \ref{fig:cqrs-ES_model} er det vist, hvor Event Sourcing tilføjes til \textbf{CQRS}-pattern'et, og hvordan dennes effekt indtræffer. Her ses det at skrivesiden kan opdatere Event Store og dermed notificere læsesiden, som nu ved at der er ny data tilgængelig, og kan nu foretage en ny iteration af Event Store'ens events. \newline 
+
+Det skal siges at CQRS blev defineret pga. Event Sourcing, da det blev nødvendigt at have denne seperatede Read / Write model. Hvilket også er grunden til at der er gjort fokus på dette i denne rapport. Event Sourcing tilbyder en model, hvor man kan udnytte eventuelle skalerings fordele ved CQRS, som f.eks. en denormaliseret read cache, hvilken også blev defineret pga. Event Sourcing's latency / read hastigheds problemer.

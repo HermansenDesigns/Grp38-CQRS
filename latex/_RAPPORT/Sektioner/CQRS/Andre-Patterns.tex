@@ -24,9 +24,9 @@ På understående figur \ref{fig:CRUDimpl} nedenfor kan det ses, hvordan \textbf
 
 Ved at separere læse og skrive operationerne, opnås skaleringsmuligheder der med \textbf{CRUD} ikke er mulige. Grunden til dette er individualiseringen af både læse og skrive klasser, samt de afhængigheder de ikke deler.\newline
 
-Derudover behøver disse ikke at udvikles 1:1.\newline
+Derudover behøver disse ikke at udvikles i et forhold der svarer til 1:1.\newline
 
-Den største forskel på de to patterns udspiller sig i, at \textbf{CRUD} udvikles som regel med \textbf{DDD} \textbf{D}omain \textbf{D}riven \textbf{D}esign, hvorimod \textbf{CQRS} udvikles ofte i et begivenhedsdrevet design (Event Driven Design). Som navnene antyder, bliver det domæne drevne design bygget op af domæner, som figurer i den virkelige verden, hvorimod eventdriven design er bygget op om begivenheder der sker. F.eks. at en kunde bestiller en kop kaffe.
+Den største forskel på de to patterns udspiller sig i, at \textbf{CRUD} udvikles som regel med \textbf{DDD} \textbf{D}omain \textbf{D}riven \textbf{D}esign, hvorimod \textbf{CQRS} udvikles ofte i et begivenhedsdrevet design (Event Driven Design). Som navnene antyder, bliver det domæne drevne design bygget op af domæner, som figurer i den virkelige verden, hvorimod eventdriven design er bygget op om begivenheder der sker. F.eks. at en kunde bestiller en kop kaffe. Det betyder dog ikke at CQRS ikke tillader DDD, men lige tværtitigmod så tillader CQRS nemlig DDD i den forstand at Pattern'et giver mulighed for at påvirket domænet, meget ligesom CRUD. Desuden kan man argumentere for at CQRS giver mere frihed i den forstand at man kan repræsentere data på mere end en måde med flere read modeller, eksempelvis i presentationen af data som grapher, træer eller lister. \newline
 
 Ved til dels at opbygget et system om det eventdrevne princip, og at adskille læse/skrive-operationer mødes nogle problematikker som skal løses. Disse problemer gør, at \textbf{CQRS} kun bruges når systemet opnår en vis størrelse og kompleksitet, men at \textbf{CQRS} forstrækkes når dette niveau opnås.\newline
 
