@@ -11,7 +11,7 @@ Derudover er der flere fordele, ved at have flere services der læser eller bliv
     \item Når vi læser data, får vi større mængder data ind. Når vi skriver, skriver vi altid kun til enkelte elementer af data, som kun påvirker ét aggregat.
     \item Fra en slutbrugers synspunkt, skal det at kunne læse data altid yde bedre end når vi skriver. Da en slutbruger typisk nemmere kan acceptere at vente på at skrive, end at vente på at kunne læse.
 \end{itemize}
-\newline
+
 Ideen med at dele læsning og skriving af data op, bliver i større designløsninger mere relevant. 
 I dag bliver mange systemer større og mere komplekse, argumentet for det er samme som virksomhederne, der bruger disse systemer. Enten fordi der er flere brugere eller fordi virksomheder går sammen for at spare midler og udnytter fælles synergier.
 Bliver store datamængder brugt i større systemer, ydeevne er foretrukket, vil det være en stor fordel at udnytte \textbf{CQRS}. Fordelen udviklingsmæssigt, er at man på den måde har mere overblik, da flere services der læser kan håndtere det samme data, og på samme måde, når der skal skrives. Hvilket også argumenterer for hvorfor \textbf{CQRS} for sig selv er relativt simpelt. Men når Event Sourcing implementeres vil de services der udfører operationerne, lave events så der på den måde er versionshistorik.
