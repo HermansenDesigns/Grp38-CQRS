@@ -1,0 +1,1 @@
+Byg projekt og tryk F5, projektet bruger Standart2, dvs at den downloader alle pakker som packages.
