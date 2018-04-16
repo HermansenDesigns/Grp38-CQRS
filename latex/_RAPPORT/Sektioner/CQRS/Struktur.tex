@@ -7,7 +7,7 @@
 	\label{fig:cqrs-model}
 \end{figure}
 
-Dette pattern består af 2 vitale dele, Read siden og Write siden, Disse 2 dele, gør at patternet effektivt kan skrive eller læse til en data store. Princippet er at disse dele er Rent (Pure) altså kun gør det som den er sat til. Write siden skriver kun til Datastore og returnere ikke nogen form for tilstand tilbage. Read siden ændre ikke data, men returnere kun Data. Disse handlinger er gjort igennem Commands og Queries.
+Dette pattern består af 2 vitale dele, Read siden og Write siden, Disse 2 dele, gør at patternet effektivt kan skrive eller læse til en data store (domæne). Princippet er at disse dele er Rent (Pure) altså kun gør det som den er sat til. Write siden skriver kun til Datastore og returnere ikke nogen form for tilstand tilbage. Read siden ændre ikke data, men returnere kun Data. Disse handlinger er gjort igennem Commands og Queries.
 
 \subsection{Generelt}
 
@@ -18,9 +18,8 @@ Dette pattern består af 2 vitale dele, Read siden og Write siden, Disse 2 dele,
 	\label{fig:class-one}
 \end{figure}
 
-Et normalt objekt indeholder både Read og Write operationer, og nogle gange kombineret, se figur \ref{fig:class-one}.
+Et normalt objekt indeholder både Read og Write operationer, og nogle gange kombineret, se figur \ref{fig:class-one}. Denne klasse refactors til at implementere CQRS som set i \ref{fig:class-two} \newline
 
-\textit{``CQRS is simply the creation of two objects where there was previously only one. The separation occurs based upon whether the methods are a command or a query'' - Greg Young}
 
 \begin{figure}[H]
 	\center
@@ -29,7 +28,9 @@ Et normalt objekt indeholder både Read og Write operationer, og nogle gange kom
 	\label{fig:class-two}
 \end{figure}
 
-Generelt består CQRS af Commands (WriteSomething) og Query reponses (ReadSomething) samt Events, se figur \ref{fig:class-two}. Commands rejser events når de bliver oprettet, og gør det muligt at opdatere Read siden. Denne opdeling gør det muligt, at udvikle disse sider totalt separeret, bortset fra den event bus, der binder det hele sammen.
+\textit{``CQRS is simply the creation of two objects where there was previously only one. The separation occurs based upon whether the methods are a command or a query'' - Greg Young}
+
+Generelt består CQRS af Commands (WriteSomething) og Query reponses (ReadSomething) samt Events, se figur \ref{fig:class-two}. Commands rejser events når de bliver oprettet, og gør det muligt at opdatere Read siden. Denne opdeling gør det muligt, at udvikle disse sider totalt separeret, bortset fra den event bus, der binder det hele sammen. I nogle variationer kan der eksempelvis bruges være brugt en enkelt database som persisterings model og en anden variation bruger en til hver side af systemet. Begge løsninger har fordele og ulember, hvilket er et spørgsmål om individualisering og kompleksitet, hvor en enkel database / domæne er nemmere at implementere end 2 databaser og et ikke delt domæne.
 
 Et scenarie der kan opstå er: Service interface sender en Command, til at ændre en model f.eks. oprette, slette, redigere en model, dette Command bliver valideret og bliver først persisteret på Write data store, men bliver også sendt til Read data store. Read data store bliver nu opdateret med frisk data, og nu opdateret med Write data store. I en anden instans kan Service interface anmode Read siden, med et query om en model fra Read data, og ønske at modtage et stykke data. Read siden opretter nu en DTO (Data Transfer Objects), og returnere den med det ønskede data.
 \subsection{Read}
