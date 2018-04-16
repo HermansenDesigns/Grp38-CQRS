@@ -38,4 +38,6 @@ Et scenarie der kan opstå er: Service interface sender en Command, til at ændr
 Read siden består Queries, hvor andre modeller kan anmode om DTO'er dette gør det let at hente data, næsten direkte fra Read data store, som næsten altid er opdateret af Write siden. Read data store, opfylder dog ikke \textit{Consistency} princippet, men nærmere \textit{Eventually Consistent} som gør at systemet skal tage højde for at der kan være samhørighedsproblemer på dataen. 
 \subsection{Write}
 
-Write siden består af Commands som kan ændre de modeller som findes i domain modellerne. Write siden opdatere sin egen data store, samt Read data store.
+Write siden består af Commands som kan ændre de modeller som findes i domain modellerne. Write siden opdatere sin egen data store, samt Read data store.\newline
+
+CQRS består også af Responsibility og Segregation, disse to punkter beskriver det ansvar og adskilelse som Commands og Queries skal overholde, altså at Commands kun returnere svar om operationen er fuldført, men ikke den tilstand som den har påvirket. Query må kun læse, men ikke ændre i tilstanden. Disse punkter er vigtige for at holde data i domænet så frisk som muligt.
